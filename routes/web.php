@@ -22,3 +22,15 @@ Route::get('/', [HomeController::class,'principal']);
 Route::get('/sobre-nos', [SobreNosController::class, 'sobre_nos']);
 
 Route::get('/contato', [ContatoController::class, 'contato']);
+
+// Route::get(
+//     '/contato/{nome}/{categoria}/{assunto}/{mensagem}/',
+//     function(
+//         string $nome, 
+//         string $categoria, 
+//         string $assunto, 
+//         string $mensagem
+//     ) {
+//         echo 'Nome: ',$nome,' - Categoria: ',$categoria,' -  Assunto: ',$assunto,' - Mensagem: ',$mensagem;
+//     }
+// );
