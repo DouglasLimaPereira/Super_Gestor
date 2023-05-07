@@ -7,11 +7,11 @@
         <div class="titulo-pagina">
             <h1>Entre em contato conosco</h1>
         </div>
-        <?php  dump($request)  ?>
-        {{-- @dump($request) --}}
         <div class="informacao-pagina">
             <div class="contato-principal">
-                @component('site.layouts._components.form_contato')
+                @component('site.layouts._components.form_contato', ['classe' => 'borda-preta'])
+                    <p>A nossa equipe analisará a sua mensagem e retornaremos o mais breve possível.</p>
+                    <p>Nosso tempo medio de resposta é de 48 horas.</p>
                 @endcomponent
             </div>
         </div>  
