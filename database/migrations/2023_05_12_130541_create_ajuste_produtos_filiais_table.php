@@ -42,6 +42,13 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ajuste_produtos_filiais');
+        Schema::table('produtos', function (Blueprint $table) {
+            $table->decimal('preco_venda', 8, 2)->default(0.01);
+            $table->integer('estoque_min')->default(1);
+            $table->integer('estoque_max')->default(1);
+        });
+
+        Schema::dropIfExists('produto_filiais');
+        Schema::dropIfExists('filiais');
     }
 };
