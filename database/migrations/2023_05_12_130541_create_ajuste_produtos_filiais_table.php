@@ -47,7 +47,7 @@ return new class extends Migration
             $table->integer('estoque_min')->default(1);
             $table->integer('estoque_max')->default(1);
         });
-
+        
         Schema::dropIfExists('produto_filiais');
         Schema::dropIfExists('filiais');
     }
