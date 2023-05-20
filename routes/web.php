@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class,'principal'])->name('site.index');
 Route::get('/sobre-nos', [SobreNosController::class, 'sobre_nos'])->name('site.sobre-nos');
 Route::get('/contato', [ContatoController::class, 'contato'])->name('site.contato');
-Route::post('/contato', [ContatoController::class, 'contato'])->name('site.contato');
+Route::post('/contato', [ContatoController::class, 'store'])->name('site.contato');
 Route::get('/login', function(){
     return 'Login';    
 })->name('site.login');;
