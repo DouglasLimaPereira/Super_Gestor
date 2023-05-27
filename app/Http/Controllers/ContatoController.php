@@ -19,10 +19,16 @@ class ContatoController extends Controller
             'nome' => 'required|min:3|max:40',
             'telefone' => 'required',
             'email' => 'required|email',
-            'motivo_contato' => 'required',
+            'motivocontato_id' => 'required',
             'mensagem' => 'required|max:2000',
-        ]);
+        ],
+        [
+            'nome.require' => 'O campo nome precisa ser preenchido', 
+        ]
+        );
+        // dd($request->all());
+        SiteContato::create($request->all());
 
-        return view('site.contato', compact('request'));
+        return redirect()->route('site.index')->with('sucsses', 'Registro criado com sucesso.');
     }
 }
