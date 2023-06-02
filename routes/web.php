@@ -4,7 +4,9 @@ use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SobreNosController;
+// use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
@@ -23,15 +25,19 @@ Route::get('/', [HomeController::class,'principal'])->name('site.index');
 Route::get('/sobre-nos', [SobreNosController::class, 'sobre_nos'])->name('site.sobre-nos');
 Route::get('/contato', [ContatoController::class, 'contato'])->name('site.contato');
 Route::post('/contato', [ContatoController::class, 'store'])->name('site.contato');
-Route::get('/login', function(){
-    return 'Login';    
-})->name('site.login');;
+Route::get('/login/{erro?}', [LoginController::class, 'index'])->name('site.login');
+Route::post('/login', [LoginController::class, 'autenticar'])->name('site.login');
 
 //APP
-Route::prefix('/app')->group(function () {
-    Route::get('/clientes', function() { return 'Clientes'; })->name('app.clientes');
-    Route::get('/fornecedores', [FornecedorController::class, 'index'])->name('app.fornecedores');
-    Route::get('/produtos', function(){ return 'Produtos'; })->name('app.produtos');
+Route::middleware('autenticacao')->prefix('/app')->group(function () {
+    Route::get('/clientes', function() { return 'Clientes'; })
+        ->name('app.clientes');
+
+    Route::get('/fornecedores', [FornecedorController::class, 'index'])
+        ->name('app.fornecedores');
+
+    Route::get('/produtos', function(){ return 'Produtos'; })
+        ->name('app.produtos');
 });
 
 Route::fallback( function() {

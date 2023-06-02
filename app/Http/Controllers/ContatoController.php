@@ -23,7 +23,16 @@ class ContatoController extends Controller
             'mensagem' => 'required|max:2000',
         ],
         [
-            'nome.require' => 'O campo nome precisa ser preenchido', 
+            'nome.required' => 'O campo nome precisa ser preenchido', 
+            'nome.min' => 'O campo nome precisa ter no minino 3 caracteres',
+            'nome.max' => 'O campo nome precisa ter no maximo 40 caracteres',
+
+            'telefone.required' => 'O campo telefone precisa ser preenchido',
+            'email.required' => 'O campo email precisa ser preenchido',
+            'email.email' => 'O campo e-mail precisa ser um e-mail válido',
+            'motivocontato_id.required' => 'O campo motivo contato precisa ser preenchido',
+            'mensagem.required' => 'O campo mensagem precisa ser preenchido',
+            'mensagem.max' => 'O campo mensagem precisa ter no maximo 2000 caracteres',
         ]
         );
         // dd($request->all());

@@ -47,7 +47,7 @@
     <select name="motivocontato_id" class="{{$classe}}">
         <option value="">Qual o motivo do contato?</option>
         @foreach ($motivo_contato as $key => $motivo)
-            <option value="{{$motivo->id}}" {{old('motivocontato_id') == $key ? 'selected' : ''}}>{{ $motivo->motivo_contato }}</option>    
+            <option value="{{$motivo->id}}" {{ (old('motivocontato_id') == $motivo->id ? 'selected' : '') }} >{{ $motivo->motivo_contato }}</option>    
         @endforeach
     </select>
         @if($errors->has('motivocontato_id'))
@@ -81,14 +81,14 @@
 </form>
 
     
-@if($errors->any())
+{{-- @if($errors->any())
     <div class="alert alert-danger" style="position: absolute; top: 0px; left: 0px; width: 100%; background: red; color: white;" role="alert">
         {{-- <pre> --}}
-        <ul class="list">
+        {{-- <ul class="list">
             @foreach ($errors->all() as $erro)
                 <li>{{$erro}}</li>
             @endforeach
-        </ul>
-        {{-- </pre> --}}
+        </ul> --}}
+        {{-- </pre> -- }}
     </div>
-@endif
+@endif --}}
