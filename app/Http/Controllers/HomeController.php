@@ -12,4 +12,8 @@ class HomeController extends Controller
 
         return view('site.principal', compact('motivo_contatos'));
     }
+
+    public function inicio(){
+        return view('app.home.home');
+    }
 }

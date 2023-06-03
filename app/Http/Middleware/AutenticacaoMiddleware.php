@@ -4,9 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 use Symfony\Component\HttpFoundation\Response;
 
-class AutenticacaoMiddleware
+class AutenticacaoMiddleware 
 {
     /**
      * Handle an incoming request.
@@ -15,12 +16,13 @@ class AutenticacaoMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // return $next($request);
-        if (true) {
+        session_start();
+        if ( isset($_SESSION['email']) && $_SESSION['email'] != '' && $_SESSION['senha'] != '') {
             return $next($request);
         }
         else {
-            return response('Acesso negado! Rota necessita autenticação!!!');
+            $erro = 2;
+            return redirect()->route('site.login', compact('erro'));
         }
         
     }

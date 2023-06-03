@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\SobreNosController;
-// use App\Http\Middleware\LogAcessoMiddleware;
+// use App\Http\Middleware\AutenticacaoMiddleware;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
@@ -30,13 +32,19 @@ Route::post('/login', [LoginController::class, 'autenticar'])->name('site.login'
 
 //APP
 Route::middleware('autenticacao')->prefix('/app')->group(function () {
-    Route::get('/clientes', function() { return 'Clientes'; })
+    Route::get('/home', [HomeController::class, 'inicio'])
+        ->name('app.home');
+
+    Route::get('/sair', [LoginController::class, 'sair'])
+        ->name('app.sair');
+
+    Route::get('/clientes', [ClienteController::class, 'index'])
         ->name('app.clientes');
 
     Route::get('/fornecedores', [FornecedorController::class, 'index'])
         ->name('app.fornecedores');
 
-    Route::get('/produtos', function(){ return 'Produtos'; })
+    Route::get('/produtos', [ProdutoController::class, 'index'])
         ->name('app.produtos');
 });
 
@@ -44,14 +52,3 @@ Route::fallback( function() {
     echo" A rota acessada não existe <a href=" .Route("site.index"). ">Clique Aqui</a> para ir a pagina inicial";
 });
 
-// Route::get(
-//     '/contato/{nome}/{categoria}/{assunto}/{mensagem}/',
-//     function(
-//         string $nome, 
-//         string $categoria, 
-//         string $assunto, 
-//         string $mensagem
-//     ) {
-//         echo 'Nome: ',$nome,' - Categoria: ',$categoria,' -  Assunto: ',$assunto,' - Mensagem: ',$mensagem;
-//     }
-// );
