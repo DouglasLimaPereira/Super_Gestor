@@ -14,6 +14,6 @@ class HomeController extends Controller
     }
 
     public function inicio(){
-        return view('app.home.home');
+        return view('app.home.index');
     }
 }

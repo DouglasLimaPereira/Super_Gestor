@@ -1,11 +1,11 @@
 @extends('app.layouts.base')
 @section('titulo')
-    Super Gestor - Cliente
+    Super Gestor - Home
 @endsection
 @section('conteudo')
     <div class="conteudo-pagina">
-        <div class="titulo-pagina">
-            <h1>Clientes</h1>
+        <div class="titulo-pagina-2">
+            <h1>Inicio</h1>
         </div>
         <div class="informacao-pagina">
             <div class="contato-principal">
