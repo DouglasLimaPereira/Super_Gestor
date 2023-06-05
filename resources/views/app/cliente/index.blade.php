@@ -14,11 +14,11 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            {{-- <h3 class="card-title">Selecione um Fornecedor</h3> --}}
+                            <h3 class="card-title"></h3>
                             <div class="card-tools">
                                 <ul class="nav nav-pills ">
                                     <li class="nav-item">
-                                        <a href="" style="margin-left: 879px;" class="nav-link active"><i class="fas fa-plus-circle"></i> NOVO CLIENTE</a>
+                                        <a href="" class="nav-link active"><i class="fas fa-plus-circle"></i> NOVO CLIENTE</a>
                                     </li>
                                 </ul>
                             </div>
