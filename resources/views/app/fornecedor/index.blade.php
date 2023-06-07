@@ -18,7 +18,7 @@
                             <div class="card-tools">
                                 <ul class="nav nav-pills ">
                                     <li class="nav-item">
-                                        <a href="" class="nav-link active"><i class="fas fa-plus-circle"></i> NOVO FORNECEDOR</a>
+                                        <a href=" {{ route('app.fornecedores.create') }} " class="nav-link active"><i class="fas fa-plus-circle"></i> NOVO FORNECEDOR</a>
                                     </li>
                                 </ul>
                             </div>
@@ -51,7 +51,7 @@
                                                         <i class="fas fa-ellipsis-v"></i>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                                                        <a href="{{ route('app.fornecedores') }}" class="dropdown-item"><i class="far fa-edit"></i> Editar</a>
+                                                        <a href="{{ route('app.fornecedores.show') }}" class="dropdown-item"><i class="far fa-edit"></i> Editar</a>
                                                         <div class="dropdown-divider"></div>
                                                         <a href="javascript:void(0)" class="dropdown-item text-danger" onclick="remover({{$row->id}})"><i class="fas fa-trash"></i> Remover</a>
                                                     </div>
