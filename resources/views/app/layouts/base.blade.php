@@ -9,8 +9,34 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </head>
 
-    <body>
+    <body class="hold-transition sidebar-mini layout-fixed">
+        <div class="wrapper">
         @include('app.layouts._partials.topo')
-        @yield('conteudo')
+    
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-12">
+                            <h1 class="m-0">@yield('titulo')</h1>
+                        </div><!-- /.col -->
+                        {{-- <div class="col-sm-6">
+                            {{-- @include('layout._partials.breadcrumb') --} }
+                        </div><!-- /.col --> --}}
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div><!-- /.content-header -->
+    
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    @yield('conteudo')
+                </div><!-- /.container-fluid -->
+            </section><!-- /.content -->
+        </div><!-- /.content-wrapper -->
+    </div>
+    <!-- ./wrapper -->
     </body>
 </html>

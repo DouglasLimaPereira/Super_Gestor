@@ -12,9 +12,9 @@ class Fornecedor extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'nome' => 'require|min:3',
-        'site' => 'require|min:3',
-        'uf' => 'require|max:2',
-        'email' => 'require|email',
+        'nome',
+        'site',
+        'uf',
+        'email',
     ];
 }

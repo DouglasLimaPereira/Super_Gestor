@@ -4,11 +4,10 @@
 @endsection
 
 @section('conteudo')
+    '<div class="titulo-pagina-2">
+        <h1>Fornecedores</h1>
+    </div>'
     <div class="conteudo-pagina">
-        <div class="titulo-pagina-2">
-            <h1>Fornecedores</h1>
-        </div>
-        
         <div class="informacao-pagina">
             <div class="container">
                 <div class="col-md-12">
@@ -24,6 +23,12 @@
                             </div>
                         </div>
                         <div class="card-body">
+                            @if (isset($type))
+                            <div class="alert alert-{{$type}}" role="alert">
+                                {{$msg}}
+                            </div>    
+                            @endif
+                            
                             <table id="table-datatable" class="table table-bordered table-striped table-hover table-responsve-md dataTable dtr-inline">
                                 <thead>
                                     <tr>
@@ -51,9 +56,11 @@
                                                         <i class="fas fa-ellipsis-v"></i>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                                                        <a href="{{ route('app.fornecedores.show') }}" class="dropdown-item"><i class="far fa-edit"></i> Editar</a>
+                                                        <a href="{{ route('app.fornecedores.edite', $row->id) }}" class="dropdown-item"><i class="fa-solid fa-pen-to-square"></i> Editar </a>
                                                         <div class="dropdown-divider"></div>
-                                                        <a href="javascript:void(0)" class="dropdown-item text-danger" onclick="remover({{$row->id}})"><i class="fas fa-trash"></i> Remover</a>
+                                                        <a href="{{ route('app.fornecedores.show', $row->id) }}" class="dropdown-item"><i class="fa-solid fa-eye"></i> Visualizar </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a href="javascript:void(0)" class="dropdown-item text-danger" onclick="remover({{$row->id}})"><i class="fa-solid fa-trash"></i> Remover </a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -77,12 +84,6 @@
     </div>
 @endsection
 
-
-@section('content')
-
-    
-
-@endsection
 
 {{-- Removendo o registro --}}
 <script>

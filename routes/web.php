@@ -43,10 +43,16 @@ Route::middleware('autenticacao')->prefix('/app')->group(function () {
 
     Route::get('/fornecedores', [FornecedorController::class, 'index'])
         ->name('app.fornecedores');
-    Route::get('/fornecedores/show', [FornecedorController::class, 'show'])
-        ->name('app.fornecedores.show');
-        Route::get('/fornecedores/create', [FornecedorController::class, 'create'])
+    Route::get('/fornecedores/create', [FornecedorController::class, 'create'])
         ->name('app.fornecedores.create');
+    Route::post('/fornecedores/store', [FornecedorController::class, 'store'])
+        ->name('app.fornecedores.store');
+    Route::get('/fornecedores/{fornecedor}/show', [FornecedorController::class, 'show'])
+        ->name('app.fornecedores.show');
+    Route::get('/fornecedores/{fornecedor}/edite', [FornecedorController::class, 'edite'])
+        ->name('app.fornecedores.edite');
+    Route::get('/fornecedores/{fornecedor}/update', [FornecedorController::class, 'update'])
+        ->name('app.fornecedores.update');
 
     Route::get('/produtos', [ProdutoController::class, 'index'])
         ->name('app.produtos');

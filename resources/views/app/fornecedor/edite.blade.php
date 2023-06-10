@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title"><i class="fas fa-pen"></i> Criação</h3>
+                    <h3 class="card-title"><i class="fas fa-edit"></i> Edição</h3>
                     <div class="card-tools">
                         <ul class="nav nav-pills ml-auto">
                             {{-- <li class="nav-item">
