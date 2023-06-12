@@ -7,6 +7,10 @@
         <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        {{-- Toastr --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     </head>
 
     <body class="hold-transition sidebar-mini layout-fixed">
@@ -25,6 +29,17 @@
                         {{-- <div class="col-sm-6">
                             {{-- @include('layout._partials.breadcrumb') --} }
                         </div><!-- /.col --> --}}
+                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                              <img src="..." class="rounded me-2" alt="...">
+                              <strong class="me-auto">Bootstrap</strong>
+                              <small>11 mins ago</small>
+                              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                              Hello, world! This is a toast message.
+                            </div>
+                        </div>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div><!-- /.content-header -->
@@ -40,3 +55,17 @@
     <!-- ./wrapper -->
     </body>
 </html>
+
+<script>
+    $(document).ready(function() {
+        toastr.options.timeOut = 15000;
+        toastr.options.closeButton = true;
+        @if(Session::has('error'))
+          toastr.error('{{ Session::get('error') }}');
+        @elseif(Session::has('warning'))
+          toastr.warning('{{ Session::get('warning') }}');
+        @elseif(Session::has('success'))
+          toastr.success('{{ Session::get('success') }}');
+        @endif
+    });
+  </script>

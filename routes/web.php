@@ -51,8 +51,10 @@ Route::middleware('autenticacao')->prefix('/app')->group(function () {
         ->name('app.fornecedores.show');
     Route::get('/fornecedores/{fornecedor}/edite', [FornecedorController::class, 'edite'])
         ->name('app.fornecedores.edite');
-    Route::get('/fornecedores/{fornecedor}/update', [FornecedorController::class, 'update'])
+    Route::put('/fornecedores/{fornecedor}/update', [FornecedorController::class, 'update'])
         ->name('app.fornecedores.update');
+    Route::get('/fornecedores/{fornecedor}/destroy', [FornecedorController::class, 'destroy'])
+        ->name('app.fornecedores.destroy');
 
     Route::get('/produtos', [ProdutoController::class, 'index'])
         ->name('app.produtos');
