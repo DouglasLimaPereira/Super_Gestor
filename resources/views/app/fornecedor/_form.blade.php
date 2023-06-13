@@ -90,7 +90,7 @@
         
         <div class="row">
             <div class="col-md-6">
-                <a href="{{route('app.fornecedores')}}" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> CANCELAR</a>  
+                <a href="{{route('app.fornecedores.index')}}" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> CANCELAR</a>  
             </div>
             <div class="col-md-6">
                 <button type="submit" class="btn btn-sm btn-success">{!!(isset($fornecedor)) ? '<i class="fas fa-sync"></i> ATUALIZAR' : '<i class="fas fa-save"></i> SALVAR'!!}</button>

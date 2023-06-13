@@ -31,33 +31,50 @@ Route::get('/login/{erro?}', [LoginController::class, 'index'])->name('site.logi
 Route::post('/login', [LoginController::class, 'autenticar'])->name('site.login');
 
 //APP
-Route::middleware('autenticacao')->prefix('/app')->group(function () {
+Route::group(['prefix'=>'app', 'as'=>'app.', 'middleware'=>['autenticacao']], function () {
     Route::get('/home', [HomeController::class, 'inicio'])
-        ->name('app.home');
+        ->name('home');
 
     Route::get('/sair', [LoginController::class, 'sair'])
-        ->name('app.sair');
+        ->name('sair');
 
     Route::get('/clientes', [ClienteController::class, 'index'])
-        ->name('app.clientes');
+        ->name('clientes.index');
 
-    Route::get('/fornecedores', [FornecedorController::class, 'index'])
-        ->name('app.fornecedores');
-    Route::get('/fornecedores/create', [FornecedorController::class, 'create'])
-        ->name('app.fornecedores.create');
-    Route::post('/fornecedores/store', [FornecedorController::class, 'store'])
-        ->name('app.fornecedores.store');
-    Route::get('/fornecedores/{fornecedor}/show', [FornecedorController::class, 'show'])
-        ->name('app.fornecedores.show');
-    Route::get('/fornecedores/{fornecedor}/edite', [FornecedorController::class, 'edite'])
-        ->name('app.fornecedores.edite');
-    Route::put('/fornecedores/{fornecedor}/update', [FornecedorController::class, 'update'])
-        ->name('app.fornecedores.update');
-    Route::get('/fornecedores/{fornecedor}/destroy', [FornecedorController::class, 'destroy'])
-        ->name('app.fornecedores.destroy');
+        Route::group(['prefix'=>'fornecedores', 'as'=>'fornecedores.'], function(){
+            Route::get('/fornecedores', [FornecedorController::class, 'index'])
+                ->name('index');
+            Route::get('/fornecedores/create', [FornecedorController::class, 'create'])
+                ->name('create');
+            Route::post('/fornecedores/store', [FornecedorController::class, 'store'])
+                ->name('store');
+            Route::get('/fornecedores/{fornecedor}/show', [FornecedorController::class, 'show'])
+                ->name('show');
+            Route::get('/fornecedores/{fornecedor}/edite', [FornecedorController::class, 'edite'])
+                ->name('edite');
+            Route::put('/fornecedores/{fornecedor}/update', [FornecedorController::class, 'update'])
+                ->name('update');
+            Route::get('/fornecedores/{fornecedor}/destroy', [FornecedorController::class, 'destroy'])
+                ->name('destroy');
+        });
 
-    Route::get('/produtos', [ProdutoController::class, 'index'])
-        ->name('app.produtos');
+        Route::group(['prefix'=>'produtos', 'as'=>'produtos.'], function(){
+            Route::get('/produtos', [ProdutoController::class, 'index'])
+                ->name('index');
+            Route::get('/produtos/create', [ProdutoController::class, 'create'])
+                ->name('create');
+            Route::post('/produtos/store', [ProdutoController::class, 'store'])
+                ->name('store');
+            Route::get('/produtos/{produto}/show', [ProdutoController::class, 'show'])
+                ->name('show');
+            Route::get('/produtos/{produto}/edite', [ProdutoController::class, 'edite'])
+                ->name('edite');
+            Route::put('/produtos/{produto}/update', [ProdutoController::class, 'update'])
+                ->name('update');
+            Route::get('/produtos/{produto}/destroy', [ProdutoController::class, 'destroy'])
+                ->name('destroy');
+        });
+    
 });
 
 Route::fallback( function() {

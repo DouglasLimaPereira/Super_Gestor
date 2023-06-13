@@ -18,7 +18,7 @@
                             <div class="">
                                 <ul class="nav nav-pills">
                                     <li class="nav-item">
-                                        <a href="" class="nav-link active"><i class="fas fa-plus-circle"></i> NOVO PRODUTO</a>
+                                        <a href="{{ route('app.produtos.create') }}" class="nav-link active"><i class="fas fa-plus-circle"></i> NOVO PRODUTO</a>
                                     </li>
                                 </ul>
                             </div>
@@ -28,10 +28,10 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">ID</th>
-                                        <th>NOME</th>
-                                        <th>E-mail</th>
-                                        <th>UF</th>
-                                        <th>SITE</th>
+                                        <th>Nome</th>
+                                        <th>Peso</th>
+                                        <th>Unidade</th>
+                                        <th>Descrição</th>
                                         <th>AÇÕES</th>
                                     </tr>
                                 </thead>
@@ -40,9 +40,9 @@
                                         <tr>
                                             <td>{{$row->id}}</td>
                                             <td>{{$row->nome}}</td>
-                                            <td>{{$row->email}}</td>
-                                            <td>{{$row->uf}}</td>
-                                            <td>{{$row->site}}</td>
+                                            <td>{{$row->peso}}</td>
+                                            <td>{{$row->unidade_id}}</td>
+                                            <td>{{$row->descricao}}</td>
                                             {{-- <td>{{date('d/m/Y', strtotime($row->funcionario->data_admissao))}}</td> --}}
                                             
                                             <td>
@@ -51,9 +51,9 @@
                                                         <i class="fas fa-ellipsis-v"></i>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                                                        <a href="{{ route('app.fornecedores') }}" class="dropdown-item"><i class="far fa-edit"></i> Editar</a>
+                                                        <a href="{{ route('app.produtos.edite', $row->id) }}" class="dropdown-item"><i class="far fa-edit"></i> Editar</a>
                                                         <div class="dropdown-divider"></div>
-                                                        <a href="{{ route('app.fornecedores.show') }}" class="dropdown-item"><i class="far fa-edit"></i> Visualizar</a>
+                                                        <a href="{{ route('app.produtos.show', $row->id) }}" class="dropdown-item"><i class="far fa-edit"></i> Visualizar</a>
                                                         <div class="dropdown-divider"></div>
                                                         <a href="javascript:void(0)" class="dropdown-item text-danger" onclick="remover({{$row->id}})"><i class="fas fa-trash"></i> Remover</a>
                                                     </div>
@@ -69,7 +69,7 @@
                             </table>
                             <br>
                             <div class="d-flex">
-                                {{-- {{$produtos->links()}} --}}
+                                {{$produtos->links()}}
                             </div>
                         </div>
                     </div>
@@ -88,11 +88,11 @@
 
 {{-- Removendo o registro --}}
 <script>
-    function remover(fornecedor){
+    function remover(produto){
         $confirmacao = confirm('Tem certeza que deseja remover este Funcionário?');
 
         if($confirmacao){
-            window.location.href = "{{url('/')}}/construtoras/"+company+"/funcionarios/"+funcionario+"/destroy"
+            window.location.href = "{{url('/')}}/app/produtos/"+produto+"/destroy"
         }
     }
 </script>

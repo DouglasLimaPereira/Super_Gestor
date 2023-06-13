@@ -6,9 +6,9 @@
     <div class="menu">
         <ul>
             <li><a href="{{ route('app.home') }}">Início</a></li>
-            <li><a href="{{ route('app.clientes') }}">Clientes</a></li>
-            <li><a href="{{ route('app.fornecedores') }}">Fornecedores</a></li>
-            <li><a href="{{ route('app.produtos') }}">Produtos</a></li>
+            <li><a href="{{ route('app.clientes.index') }}">Clientes</a></li>
+            <li><a href="{{ route('app.fornecedores.index') }}">Fornecedores</a></li>
+            <li><a href="{{ route('app.produtos.index') }}">Produtos</a></li>
             <li><a href="{{ route('app.sair') }}">Sair</a></li>
         </ul>
     </div>
