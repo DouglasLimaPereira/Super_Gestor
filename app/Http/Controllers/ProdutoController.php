@@ -41,27 +41,23 @@ class ProdutoController extends Controller
         $msg = '';
         $type = '';
         $request->validate([
-            'nome' => 'required|min:3|max:40',
-            'site' => 'required',
-            'email' => 'required|email',
-            'uf' => 'required|min:2|max:2',
+            'nome' => 'required|min:3',
+            'peso' => 'required',
+            'unidade_id' => 'exists:unidades,id|required|integer',
+            'descricao' => 'min:3',
         ],
         [
-            'nome.required' => 'O campo nome precisa ser preenchido', 
+            'nome.required' => 'O campo nome precisa ser preenchido',
+            'peso.required' => 'O campo peso precisa ser preenchido',  
             'nome.min' => 'O campo nome precisa ter no minino 3 caracteres',
-            'nome.max' => 'O campo nome precisa ter no maximo 40 caracteres',
-
-            'site.required' => 'O campo site precisa ser preenchido',
-            'email.required' => 'O campo email precisa ser preenchido',
-            'email.email' => 'O campo e-mail precisa ser um e-mail válido',
-            'uf.required' => 'O campo mensagem precisa ser preenchido',
-            'uf.min' => 'O campo uf precisa ter no minino 2 caracteres',
-            'uf.max' => 'O campo uf precisa ter no maximo 2 caracteres',
+            'unidade_id.required' => 'O campo unidade precisa ser preenchido',
+            'unidade_id.integer' => 'O campo unidade precisa ser um número inteiro',
+            'descricao.min' => 'O campo descricao precisa ter no minino 3 caracteres',
         ]
         );
 
-        if (Produto::where('email', $request->email)->first()) {
-            return back()->withErrors('Nome de usuário já utilizado');
+        if (Produto::where('nome', $request->nome)->first()) {
+            return back()->withErrors('Produto já cadastrado');
         }
         
         try {
@@ -69,24 +65,23 @@ class ProdutoController extends Controller
         } catch (\Throwable $th) {
             $msg = 'Falha ao realizar cadastro';
             $type = 'info';
-            dd($th);
-            return redirect()->route('app.fornecedores',compact('msg', 'type'));
+            return redirect()->route('app.produtos.create',compact('msg', 'type'));
         }
 
         $type = 'success';
         $msg = 'Cadastro realizado com sucesso!';
-        return redirect()->route('app.fornecedores',compact('msg', 'type'));
+        return redirect()->route('app.produtos.index',compact('msg', 'type'));
     }
 
     public function update(Request $request, Produto $produto){
-        if (Produto::where('id', '!=', $produto->id)->where('email', $request->email)->first()) {
-            return back()->with('error', 'E-mail em uso!');
+        if (Produto::where('id', '!=', $produto->id)->where('nome', $request->nome)->first()) {
+            return back()->with('error', 'Produto já Cadastrado');
         }
         DB::beginTransaction();
         try {
             $produto->update($request->all());
             DB::commit();
-            return redirect()->route('app.fornecedores.edite', $produto->id)->with('success', 'Fornecedor atualizado com sucesso!');
+            return redirect()->route('app.produtos.edite', $produto->id)->with('success', 'Fornecedor atualizado com sucesso!');
         } catch (\Throwable $e) {
             DB::rollBack();
             return back()->with('error', 'Atualização não realizada!');
@@ -99,10 +94,10 @@ class ProdutoController extends Controller
         try {
             $produto->delete();
             DB::commit();
-            return redirect()->route('app.fornecedores')->with('success', 'Fornecedor atualizado com sucesso!');
+            return redirect()->route('app.produtos.index')->with('success', 'Produto deletado com sucesso!');
         } catch (\Throwable $e) {
             DB::rollBack();
-            return back()->with('error', 'Atualização não realizada!');
+            return back()->with('error', 'Erro ao excluir produto!');
         }
     }
 }

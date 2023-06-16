@@ -12,4 +12,9 @@ class Unidade extends Model
         'unidade',
         'descricao',
     ];
+
+    public function produtos()
+    {
+        return $this->belongsTo(Produto::class);
+    }
 }

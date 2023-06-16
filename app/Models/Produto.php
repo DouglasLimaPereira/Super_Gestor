@@ -15,4 +15,9 @@ class Produto extends Model
         'descricao',
         'unidade_id',
     ];
+
+    public function detalhes()
+    {
+        return $this->hasMany(ProdutoDetalhe::class);
+    }
 }

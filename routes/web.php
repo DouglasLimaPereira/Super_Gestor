@@ -7,6 +7,7 @@ use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\ProdutoDetalheController;
 use App\Http\Controllers\SobreNosController;
 // use App\Http\Middleware\AutenticacaoMiddleware;
 use Illuminate\Routing\RouteGroup;
@@ -42,39 +43,55 @@ Route::group(['prefix'=>'app', 'as'=>'app.', 'middleware'=>['autenticacao']], fu
         ->name('clientes.index');
 
         Route::group(['prefix'=>'fornecedores', 'as'=>'fornecedores.'], function(){
-            Route::get('/fornecedores', [FornecedorController::class, 'index'])
+            Route::get('/', [FornecedorController::class, 'index'])
                 ->name('index');
-            Route::get('/fornecedores/create', [FornecedorController::class, 'create'])
+            Route::get('create', [FornecedorController::class, 'create'])
                 ->name('create');
-            Route::post('/fornecedores/store', [FornecedorController::class, 'store'])
+            Route::post('store', [FornecedorController::class, 'store'])
                 ->name('store');
-            Route::get('/fornecedores/{fornecedor}/show', [FornecedorController::class, 'show'])
+            Route::get('{fornecedor}/show', [FornecedorController::class, 'show'])
                 ->name('show');
-            Route::get('/fornecedores/{fornecedor}/edite', [FornecedorController::class, 'edite'])
+            Route::get('{fornecedor}/edite', [FornecedorController::class, 'edite'])
                 ->name('edite');
-            Route::put('/fornecedores/{fornecedor}/update', [FornecedorController::class, 'update'])
+            Route::put('{fornecedor}/update', [FornecedorController::class, 'update'])
                 ->name('update');
-            Route::get('/fornecedores/{fornecedor}/destroy', [FornecedorController::class, 'destroy'])
+            Route::get('{fornecedor}/destroy', [FornecedorController::class, 'destroy'])
                 ->name('destroy');
         });
 
         Route::group(['prefix'=>'produtos', 'as'=>'produtos.'], function(){
-            Route::get('/produtos', [ProdutoController::class, 'index'])
+            Route::get('/', [ProdutoController::class, 'index'])
                 ->name('index');
-            Route::get('/produtos/create', [ProdutoController::class, 'create'])
+            Route::get('create', [ProdutoController::class, 'create'])
                 ->name('create');
-            Route::post('/produtos/store', [ProdutoController::class, 'store'])
+            Route::post('store', [ProdutoController::class, 'store'])
                 ->name('store');
-            Route::get('/produtos/{produto}/show', [ProdutoController::class, 'show'])
+            Route::get('{produto}/show', [ProdutoController::class, 'show'])
                 ->name('show');
-            Route::get('/produtos/{produto}/edite', [ProdutoController::class, 'edite'])
+            Route::get('{produto}/edite', [ProdutoController::class, 'edite'])
                 ->name('edite');
-            Route::put('/produtos/{produto}/update', [ProdutoController::class, 'update'])
+            Route::put('{produto}/update', [ProdutoController::class, 'update'])
                 ->name('update');
-            Route::get('/produtos/{produto}/destroy', [ProdutoController::class, 'destroy'])
+            Route::get('{produto}/destroy', [ProdutoController::class, 'destroy'])
                 ->name('destroy');
         });
-    
+
+        Route::group(['prefix'=>'produto-detalhe', 'as'=>'produto-detalhe.'], function(){
+            Route::get('/', [ProdutoDetalheController::class, 'index'])
+                ->name('index');
+            Route::get('create', [ProdutoDetalheController::class, 'create'])
+                ->name('create');
+            Route::post('store', [ProdutoDetalheController::class, 'store'])
+                ->name('store');
+            Route::get('{produto_detalhe}/show', [ProdutoDetalheController::class, 'show'])
+                ->name('show');
+            Route::get('{produto_detalhe}/edite', [ProdutoDetalheController::class, 'edite'])
+                ->name('edite');
+            Route::put('{produto_detalhe}/update', [ProdutoDetalheController::class, 'update'])
+                ->name('update');
+            Route::get('{produto_detalhe}/destroy', [ProdutoDetalheController::class, 'destroy'])
+                ->name('destroy');
+        });
 });
 
 Route::fallback( function() {

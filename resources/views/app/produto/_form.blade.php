@@ -7,7 +7,7 @@
     <form action="{{route('app.produtos.store')}}" method="POST" enctype="multipart/form-data">    
 @endif
     @csrf
-        <div class="div-col">
+        <div class="col">
             <div class="form-floating">
                 <input type="text" class="form-control" name="nome" placeholder="Nome" id="nome" value="{{ isset($produto) ? $produto->nome : old('nome')}}">
                 <label for="nome">Nome</label>
@@ -27,7 +27,7 @@
         </div>
         <br>
         
-        <div class="div-col">
+        <div class="col">
             <div class="form-floating">
                 <input type="text" class="form-control" name="peso" placeholder="peso" id="peso" value="{{ isset($produto) ? $produto->peso : old('peso')}}">
                 <label for="peso">Peso</label>
@@ -46,12 +46,13 @@
             @endif
         </div>
         <br>
-        <div class="div-col">
+
+        <div class="col">
             <div class="form-floating">
                 <select class="form-select" name="unidade_id" id="unidade_id">
                     <option value="">Selecione...</option>
                     @foreach ($unidades as $key => $unidade)
-                        <option value="{{$unidade->id}}" {{ ((isset($produto) && $produto->unidade_id == $unidade->id ? 'selected' : old('unidade_id')) == $unidade->id ? 'selected' : '') }} >{{ $unidade->unidade }}</option>    
+                        <option value="{{$unidade->id}}" {{ ($produto->unidade_id ?? old('unidade_id')) == $unidade->id ? 'selected' : '' }} >{{ $unidade->unidade }}</option>    
                     @endforeach
                 </select>
                 <label for="unidade_id">Unidade</label>
@@ -70,6 +71,13 @@
             @endif
         </div>
         <br>
+
+        <div class="col">
+            <div class="form-floating">
+                <textarea name="descricao" placeholder="" class="form-control" id="descricao" rows="3">{{isset($produto) ? $produto->descricao : old('descricao')}}</textarea>
+                <label for="descricao">Descrição</label>
+            </div>
+        </div>
 
         <hr>
         

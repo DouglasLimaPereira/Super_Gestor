@@ -26,6 +26,99 @@
                             </div>
                         </div>
                     </div>
+                    <br>
+
+                    <div class="card">
+                        <div class="card-header bg-primary font-weight-bold">
+                            <h5>Detalhes do Produto</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-striped table-responsive-md">
+                                <thead class="table-info">
+                                    <tr>
+                                        <th>Comprimento</th>
+                                        <th>Largura</th>
+                                        <th>Altura</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($produto->detalhes as $produto_detalhe )
+                                    <tr>
+                                        
+                                        <td>{{ number_format($produto_detalhe->comprimento, 2, ',','.') }} cm</td>
+                                        <td>{{ number_format($produto_detalhe->largura, 2, ',','.') }} cm</td>
+                                        <td>{{ number_format($produto_detalhe->altura, 2, ',','.') }} cm</td>
+
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-light" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                                                    <a href="{{ route('app.produto-detalhe.edite', $produto_detalhe->id) }}" class="dropdown-item"><i class="far fa-edit"></i> Editar</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a href="javascript:void(0)" class="dropdown-item text-danger" onclick="remover({{$produto_detalhe->id}})"><i class="fas fa-trash"></i> Remover</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        
+                                    </tr>
+                                    @empty
+                                    <div class="">
+                                        <ul class="nav nav-pills">
+                                            <li class="nav-item">
+                                                <a href="{{ route('app.produto-detalhe.create') }}" class="nav-link active"><i class="fas fa-plus-circle"></i> NOVO DETALHES</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <tr><td colspan="3"><span class="text-danger">Nenhum registro encontrado.</span></td></tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    {{-- <div class="callout-info">
+                        <h5><i class="fas fa-angle-right"></i> Detalhes do Produto</h5>
+                        <hr>
+                        <table class="table table-bordered table-striped table-hover table-responsive-md dataTable dtr-inline">
+                            <thead>
+                                <tr>
+                                    <th>Comprimento</th>
+                                    <th>Largura</th>
+                                    <th>Altura</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($produto->detalhes as $produto_detalhe)
+                                    <tr>
+                                        <td>{{ number_format($produto_detalhe->comprimento, 2, ',','.') }} cm</td>
+                                        <td>{{ number_format($produto_detalhe->largura, 2, ',','.') }} cm</td>
+                                        <td>{{ number_format($produto_detalhe->altura, 2, ',','.') }} cm</td>
+
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-light" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                                                    <a href="{{ route('app.produto-detalhe.edite', $produto_detalhe->id) }}" class="dropdown-item"><i class="far fa-edit"></i> Editar</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a href="javascript:void(0)" class="dropdown-item text-danger" onclick="remover({{$produto_detalhe->id}})"><i class="fas fa-trash"></i> Remover</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr><td colspan="3"><span class="text-danger">Nenhum registro encontrado.</span></td></tr>
+                                @endforelse
+                            </tbody>
+                        </table>                        
+                    </div> --}}
+
                     <hr>
                     <div class="dropdown-divider"></div>
                     <div class="row col-md-12">
