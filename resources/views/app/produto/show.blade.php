@@ -30,7 +30,47 @@
 
                     <div class="card">
                         <div class="card-header bg-primary font-weight-bold">
-                            <h5>Detalhes do Produto</h5>
+                            <h5 style="color: white">Fornecedor</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-striped table-responsive-md">
+                                <thead class="table-info">
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Uf</th>
+                                        <th>Site</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if ($produto->fornecedor)
+                                    <tr>
+                                        <td>{{ $produto->fornecedor->nome}}</td>
+                                        <td>{{ $produto->fornecedor->uf}}</td>
+                                        <td>{{ $produto->fornecedor->site}}</td>
+
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-light" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                                                    <a href="{{ route('app.fornecedores.show', $produto->fornecedor->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Visualizar</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @else
+                                    <tr><td colspan="4"><span class="text-danger">Nenhum registro encontrado.</span></td></tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-header bg-primary font-weight-bold">
+                            <h5 style="color: white">Detalhes do Produto</h5>
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered table-striped table-responsive-md">
@@ -43,12 +83,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($produto->detalhes as $produto_detalhe )
+                                    @if ($produto->detalhes)
                                     <tr>
                                         
-                                        <td>{{ number_format($produto_detalhe->comprimento, 2, ',','.') }} cm</td>
-                                        <td>{{ number_format($produto_detalhe->largura, 2, ',','.') }} cm</td>
-                                        <td>{{ number_format($produto_detalhe->altura, 2, ',','.') }} cm</td>
+                                        <td>{{ number_format($produto->detalhes->comprimento, 2, ',','.') }} cm</td>
+                                        <td>{{ number_format($produto->detalhes->largura, 2, ',','.') }} cm</td>
+                                        <td>{{ number_format($produto->detalhes->altura, 2, ',','.') }} cm</td>
 
                                         <td>
                                             <div class="dropdown">
@@ -56,15 +96,15 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                                                    <a href="{{ route('app.produto-detalhe.edite', $produto_detalhe->id) }}" class="dropdown-item"><i class="far fa-edit"></i> Editar</a>
+                                                    <a href="{{ route('app.produto-detalhe.edite', $produto->detalhes->id) }}" class="dropdown-item"><i class="far fa-edit"></i> Editar</a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a href="javascript:void(0)" class="dropdown-item text-danger" onclick="remover({{$produto_detalhe->id}})"><i class="fas fa-trash"></i> Remover</a>
+                                                    <a href="javascript:void(0)" class="dropdown-item text-danger" onclick="remover({{$produto->detalhes->id}})"><i class="fas fa-trash"></i> Remover</a>
                                                 </div>
                                             </div>
                                         </td>
                                         
                                     </tr>
-                                    @empty
+                                    @else
                                     <div class="">
                                         <ul class="nav nav-pills">
                                             <li class="nav-item">
@@ -72,8 +112,8 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <tr><td colspan="3"><span class="text-danger">Nenhum registro encontrado.</span></td></tr>
-                                    @endforelse
+                                    <tr><td colspan="4"><span class="text-danger">Nenhum registro encontrado.</span></td></tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

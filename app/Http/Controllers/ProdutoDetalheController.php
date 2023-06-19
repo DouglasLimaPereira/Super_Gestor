@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
-use App\Models\ProdutoDetalhe;
+use App\Models\Produtodetalhe;
 use App\Models\Unidade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ProdutoDetalheController extends Controller
+class ProdutodetalheController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -51,12 +51,12 @@ class ProdutoDetalheController extends Controller
         ]
         );
 
-        if (ProdutoDetalhe::where('produto_id', $request->produto_id)->first()) {
+        if (Produtodetalhe::where('produto_id', $request->produto_id)->first()) {
             return back()->withErrors('Detalhe do Produto já cadastrado');
         }
         
         try {
-            ProdutoDetalhe::create($request->all());
+            Produtodetalhe::create($request->all());
         } catch (\Throwable $th) {
             $msg = 'Falha ao realizar cadastro';
             $type = 'info';
@@ -80,7 +80,7 @@ class ProdutoDetalheController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edite(ProdutoDetalhe $produto_detalhe)
+    public function edite(Produtodetalhe $produto_detalhe)
     {
         $unidades = Unidade::all();
         $produtos = Produto::all();
@@ -90,9 +90,9 @@ class ProdutoDetalheController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProdutoDetalhe $produto_detalhe)
+    public function update(Request $request, Produtodetalhe $produto_detalhe)
     {
-        if (ProdutoDetalhe::where('id', '!=', $produto_detalhe->id)->where('produto_id', $request->produto_id)->first()) {
+        if (Produtodetalhe::where('id', '!=', $produto_detalhe->id)->where('produto_id', $request->produto_id)->first()) {
             return back()->with('error', 'Detalhe de Produto já Cadastrado');
         }
         DB::beginTransaction();

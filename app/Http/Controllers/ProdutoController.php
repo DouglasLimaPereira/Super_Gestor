@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fornecedor;
 use App\Models\Produto;
 use App\Models\Unidade;
 use Illuminate\Http\Request;
@@ -20,15 +21,17 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
+        $fornecedores = Fornecedor::all();
         
-        return view('app.produto.create', compact('unidades'));
+        return view('app.produto.create', compact('unidades','fornecedores'));
     }
 
     public function edite(Request $request, Produto $produto)
     {
         $unidades = Unidade::all();
+        $fornecedores = Fornecedor::all();
         
-        return view('app.produto.edite', compact('unidades', 'produto'));
+        return view('app.produto.edite', compact('unidades', 'fornecedores', 'produto'));
     }
 
     public function show(Request $request, Produto $produto)
@@ -44,6 +47,7 @@ class ProdutoController extends Controller
             'nome' => 'required|min:3',
             'peso' => 'required',
             'unidade_id' => 'exists:unidades,id|required|integer',
+            'fornecedor_id' => 'exists:fornecedores,id|required|integer',
             'descricao' => 'min:3',
         ],
         [
@@ -51,6 +55,7 @@ class ProdutoController extends Controller
             'peso.required' => 'O campo peso precisa ser preenchido',  
             'nome.min' => 'O campo nome precisa ter no minino 3 caracteres',
             'unidade_id.required' => 'O campo unidade precisa ser preenchido',
+            'fornecedor_id.required' => 'O campo fornecedor precisa ser preenchido',
             'unidade_id.integer' => 'O campo unidade precisa ser um número inteiro',
             'descricao.min' => 'O campo descricao precisa ter no minino 3 caracteres',
         ]
@@ -74,15 +79,19 @@ class ProdutoController extends Controller
     }
 
     public function update(Request $request, Produto $produto){
+        
         if (Produto::where('id', '!=', $produto->id)->where('nome', $request->nome)->first()) {
             return back()->with('error', 'Produto já Cadastrado');
         }
         DB::beginTransaction();
         try {
+            // dd($request->all());
             $produto->update($request->all());
+            
             DB::commit();
             return redirect()->route('app.produtos.edite', $produto->id)->with('success', 'Fornecedor atualizado com sucesso!');
         } catch (\Throwable $e) {
+            dd($e->getMessage());
             DB::rollBack();
             return back()->with('error', 'Atualização não realizada!');
         }

@@ -9,6 +9,30 @@
     @csrf
         <div class="col">
             <div class="form-floating">
+                <select class="form-select" name="fornecedor_id" id="fornecedor_id">
+                    <option value="">Selecione...</option>
+                    @foreach ($fornecedores as $key => $fornecedor)
+                        <option value="{{$fornecedor->id}}" {{ ($produto->fornecedor_id ?? old('fornecedor_id')) == $fornecedor->id ? 'selected' : '' }} >{{ $fornecedor->nome }}</option>    
+                    @endforeach
+                </select>
+                <label for="fornecedor_id">Fornecedor</label>
+            </div>
+            @if($errors->has('fornecedor_id'))
+                <div style="
+                    text-align: left;
+                    width: 99.3%;
+                    background: red;
+                    color: white;
+                    margin-top: -10px;
+                    padding: 5px;
+                ">
+                    {{$errors->first('fornecedor_id')}}
+                </div>
+            @endif
+        </div>
+        <br>
+        <div class="col">
+            <div class="form-floating">
                 <input type="text" class="form-control" name="nome" placeholder="Nome" id="nome" value="{{ isset($produto) ? $produto->nome : old('nome')}}">
                 <label for="nome">Nome</label>
             </div>

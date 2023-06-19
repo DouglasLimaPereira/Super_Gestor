@@ -53,7 +53,7 @@
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                                                         <a href="{{ route('app.produtos.edite', $row->id) }}" class="dropdown-item"><i class="far fa-edit"></i> Editar</a>
                                                         <div class="dropdown-divider"></div>
-                                                        <a href="{{ route('app.produtos.show', $row->id) }}" class="dropdown-item"><i class="far fa-edit"></i> Visualizar</a>
+                                                        <a href="{{ route('app.produtos.show', $row->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Visualizar</a>
                                                         <div class="dropdown-divider"></div>
                                                         <a href="javascript:void(0)" class="dropdown-item text-danger" onclick="remover({{$row->id}})"><i class="fas fa-trash"></i> Remover</a>
                                                     </div>
