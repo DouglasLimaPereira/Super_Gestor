@@ -29,7 +29,7 @@
                         {{-- <div class="col-sm-6">
                             {{-- @include('layout._partials.breadcrumb') --} }
                         </div><!-- /.col --> --}}
-                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                        {{-- <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-header">
                               <img src="..." class="rounded me-2" alt="...">
                               <strong class="me-auto">Bootstrap</strong>
@@ -39,7 +39,7 @@
                             <div class="toast-body">
                               Hello, world! This is a toast message.
                             </div>
-                        </div>
+                        </div> --}}
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div><!-- /.content-header -->

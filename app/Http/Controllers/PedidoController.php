@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -11,7 +13,8 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        //
+        $pedidos = Pedido::all();
+        return view('app.pedido.index', compact('pedidos'));
     }
 
     /**
@@ -19,7 +22,8 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //
+        $clientes = Cliente::all();
+        return view('app.pedido.create', compact('clientes'));
     }
 
     /**
@@ -33,17 +37,18 @@ class PedidoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Pedido $pedido)
     {
-        //
+        return view('app.pedido.show', compact('pedido'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Pedido $pedido)
     {
-        //
+        $clientes = Cliente::all();
+        return view('app.pedido.edite', compact('pedido', 'clientes'));
     }
 
     /**

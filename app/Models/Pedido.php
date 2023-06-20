@@ -13,7 +13,7 @@ class Pedido extends Model
         'cliente_id'
     ];
 
-    public function clientes()
+    public function cliente()
     {
         return $this->belongsTo(Cliente::class);
     }
