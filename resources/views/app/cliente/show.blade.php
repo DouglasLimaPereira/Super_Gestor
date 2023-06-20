@@ -77,7 +77,7 @@
                                             <div class="">
                                                 <ul class="nav nav-pills">
                                                     <li class="nav-item">
-                                                        <a href="{{ route('app.pedidos.create') }}" class="nav-link active"><i class="fas fa-plus-circle"></i> NOVO PRODUTO</a>
+                                                        <a href="{{ route('app.pedidos.create') }}" class="nav-link active"><i class="fas fa-plus-circle"></i> NOVO PEDIDO</a>
                                                     </li>
                                                 </ul>
                                             </div>
