@@ -21,7 +21,7 @@ class ProdutodetalheController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($produto)
+    public function create()
     {
         $unidades = Unidade::all();
         $produtos = Produto::all();
@@ -57,6 +57,7 @@ class ProdutodetalheController extends Controller
         
         try {
             Produtodetalhe::create($request->all());
+            return redirect()->route('app.produto-detalhe.index');
         } catch (\Throwable $th) {
             $msg = 'Falha ao realizar cadastro';
             $type = 'info';

@@ -18,7 +18,7 @@
                             <div class="card-tools">
                                 <ul class="nav nav-pills ">
                                     <li class="nav-item">
-                                        <a href="" class="nav-link active"><i class="fas fa-plus-circle"></i> NOVO CLIENTE</a>
+                                        <a href="{{ route('app.clientes.create') }}" class="nav-link active"><i class="fas fa-plus-circle"></i> NOVO CLIENTE</a>
                                     </li>
                                 </ul>
                             </div>
@@ -28,7 +28,7 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">ID</th>
-                                        <th>NOME</th>
+                                        <th>Nome</th>
                                         <th>E-mail</th>
                                         <th>UF</th>
                                         <th>SITE</th>
@@ -51,7 +51,9 @@
                                                         <i class="fas fa-ellipsis-v"></i>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                                                        <a href="{{ route('app.fornecedores') }}" class="dropdown-item"><i class="far fa-edit"></i> Editar</a>
+                                                        <a href="{{ route('app.clientes.edite', $row->id) }}" class="dropdown-item"><i class="far fa-edit"></i> Editar</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a href="{{ route('app.clientes.show', $row->id) }}" class="dropdown-item"><i class="fa-solid fa-eye"></i> Visualizar </a>
                                                         <div class="dropdown-divider"></div>
                                                         <a href="javascript:void(0)" class="dropdown-item text-danger" onclick="remover({{$row->id}})"><i class="fas fa-trash"></i> Remover</a>
                                                     </div>
@@ -86,11 +88,11 @@
 
 {{-- Removendo o registro --}}
 <script>
-    function remover(fornecedor){
-        $confirmacao = confirm('Tem certeza que deseja remover este Funcionário?');
+    function remover(cliente){
+        $confirmacao = confirm('Tem certeza que deseja remover este Cliente?');
 
         if($confirmacao){
-            window.location.href = "{{url('/')}}/construtoras/"+company+"/funcionarios/"+funcionario+"/destroy"
+            window.location.href = "{{url('/')}}/app/clientes/"+cliente+"/destroy"
         }
     }
 </script>

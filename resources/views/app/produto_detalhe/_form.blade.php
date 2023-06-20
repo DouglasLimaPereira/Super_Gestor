@@ -122,7 +122,7 @@
         <div class="row">
             <div class="col-md-6">
                 {{-- {!! isset($produto_detalhe) ? <a href="{{route('app.produtos.show', $produto_detalhe->produto_id)}}" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> CANCELAR</a> : <a href="{{route('app.produtos.show', $produto_detalhe->produto_id)}}" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> CANCELAR</a>  !!}   --}}
-                <a href="{{route('app.produtos.show', $produto_detalhe->produto_id)}}" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> CANCELAR</a>
+                <a href="{{route('app.produtos.index')}}" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> CANCELAR</a>
             </div>
             <div class="col-md-6">
                 <button type="submit" class="btn btn-sm btn-success">{!!(isset($produto_detalhe)) ? '<i class="fas fa-sync"></i> ATUALIZAR' : '<i class="fas fa-save"></i> SALVAR'!!}</button>

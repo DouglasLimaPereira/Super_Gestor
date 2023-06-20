@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PedidoProdutoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProdutoDetalheController;
 use App\Http\Controllers\SobreNosController;
@@ -39,8 +41,56 @@ Route::group(['prefix'=>'app', 'as'=>'app.', 'middleware'=>['autenticacao']], fu
     Route::get('/sair', [LoginController::class, 'sair'])
         ->name('sair');
 
-    Route::get('/clientes', [ClienteController::class, 'index'])
-        ->name('clientes.index');
+        Route::group(['prefix'=>'clientes', 'as'=>'clientes.'], function(){
+            Route::get('/', [ClienteController::class, 'index'])
+                ->name('index');
+            Route::get('create', [ClienteController::class, 'create'])
+                ->name('create');
+            Route::post('store', [ClienteController::class, 'store'])
+                ->name('store');
+            Route::get('{cliente}/show', [ClienteController::class, 'show'])
+                ->name('show');
+            Route::get('{cliente}/edite', [ClienteController::class, 'edite'])
+                ->name('edite');
+            Route::put('{cliente}/update', [ClienteController::class, 'update'])
+                ->name('update');
+            Route::get('{cliente}/destroy', [ClienteController::class, 'destroy'])
+                ->name('destroy');
+        });
+
+        Route::group(['prefix'=>'pedidos', 'as'=>'pedidos.'], function(){
+            Route::get('/', [PedidoController::class, 'index'])
+                ->name('index');
+            Route::get('create', [PedidoController::class, 'create'])
+                ->name('create');
+            Route::post('store', [PedidoController::class, 'store'])
+                ->name('store');
+            Route::get('{cliente}/show', [PedidoController::class, 'show'])
+                ->name('show');
+            Route::get('{cliente}/edite', [PedidoController::class, 'edite'])
+                ->name('edite');
+            Route::put('{cliente}/update', [PedidoController::class, 'update'])
+                ->name('update');
+            Route::get('{cliente}/destroy', [PedidoController::class, 'destroy'])
+                ->name('destroy');
+        });
+
+        Route::group(['prefix'=>'pedido-produtos', 'as'=>'pedido-produtos.'], function(){
+            Route::get('/', [PedidoProdutoController::class, 'index'])
+                ->name('index');
+            Route::get('create', [PedidoProdutoController::class, 'create'])
+                ->name('create');
+            Route::post('store', [PedidoProdutoController::class, 'store'])
+                ->name('store');
+            Route::get('{cliente}/show', [PedidoProdutoController::class, 'show'])
+                ->name('show');
+            Route::get('{cliente}/edite', [PedidoProdutoController::class, 'edite'])
+                ->name('edite');
+            Route::put('{cliente}/update', [PedidoProdutoController::class, 'update'])
+                ->name('update');
+            Route::get('{cliente}/destroy', [PedidoProdutoController::class, 'destroy'])
+                ->name('destroy');
+        });
 
         Route::group(['prefix'=>'fornecedores', 'as'=>'fornecedores.'], function(){
             Route::get('/', [FornecedorController::class, 'index'])
