@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class PedidoProduto extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'pedido_id',
         'produto_id',
@@ -16,6 +15,11 @@ class PedidoProduto extends Model
 
     public function produtos()
     {
-        return $this->belongsTo(Pedido::class);
+        return $this->belongsToMany(Produto::class);
+    }
+
+    public function pedidos()
+    {
+        return $this->belongsToMany(Pedido::class);
     }
 }

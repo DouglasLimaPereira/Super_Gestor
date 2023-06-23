@@ -65,30 +65,30 @@ Route::group(['prefix'=>'app', 'as'=>'app.', 'middleware'=>['autenticacao']], fu
                 ->name('create');
             Route::post('store', [PedidoController::class, 'store'])
                 ->name('store');
-            Route::get('{cliente}/show', [PedidoController::class, 'show'])
+            Route::get('{pedido}/show', [PedidoController::class, 'show'])
                 ->name('show');
-            Route::get('{cliente}/edite', [PedidoController::class, 'edite'])
+            Route::get('{pedido}/edite', [PedidoController::class, 'edite'])
                 ->name('edite');
-            Route::put('{cliente}/update', [PedidoController::class, 'update'])
+            Route::put('{pedido}/update', [PedidoController::class, 'update'])
                 ->name('update');
-            Route::get('{cliente}/destroy', [PedidoController::class, 'destroy'])
+            Route::get('{pedido}/destroy', [PedidoController::class, 'destroy'])
                 ->name('destroy');
         });
 
         Route::group(['prefix'=>'pedido-produtos', 'as'=>'pedido-produtos.'], function(){
             Route::get('/', [PedidoProdutoController::class, 'index'])
                 ->name('index');
-            Route::get('create', [PedidoProdutoController::class, 'create'])
+            Route::get('create/{pedido}', [PedidoProdutoController::class, 'create'])
                 ->name('create');
-            Route::post('store', [PedidoProdutoController::class, 'store'])
+            Route::post('store/{pedido}', [PedidoProdutoController::class, 'store'])
                 ->name('store');
-            Route::get('{cliente}/show', [PedidoProdutoController::class, 'show'])
+            Route::get('{pedido_produtos}/show', [PedidoProdutoController::class, 'show'])
                 ->name('show');
-            Route::get('{cliente}/edite', [PedidoProdutoController::class, 'edite'])
+            Route::get('{pedido_produtos}/edite', [PedidoProdutoController::class, 'edite'])
                 ->name('edite');
-            Route::put('{cliente}/update', [PedidoProdutoController::class, 'update'])
+            Route::put('{pedido_produtos}/update', [PedidoProdutoController::class, 'update'])
                 ->name('update');
-            Route::get('{cliente}/destroy', [PedidoProdutoController::class, 'destroy'])
+            Route::get('{pedido_produtos}/destroy', [PedidoProdutoController::class, 'destroy'])
                 ->name('destroy');
         });
 

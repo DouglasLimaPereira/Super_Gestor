@@ -1,23 +1,39 @@
 
 <div style="width: 30%; margin-left: auto; margin-right: auto;" class="contato-principal">
-    @if(isset($pedido))
-    <form action="{{route('app.pedidos.update', $pedido->id)}}" method="POST" enctype="multipart/form-data">
+    @if(isset($pedido_produto))
+    <form action="{{route('app.pedido-produtos.update', $pedido_produto->id)}}" method="POST" enctype="multipart/form-data">
     @method('PUT')
 @else
-    <form action="{{route('app.pedidos.store')}}" method="POST" enctype="multipart/form-data">    
+    <form action="{{route('app.pedido-produtos.store', $pedido->id)}}" method="POST" enctype="multipart/form-data">    
 @endif
     @csrf
+        <table id="table-datatable" class="table table-bordered   table-hover table-responsve-md dataTable dtr-inline">
+            <thead>
+                <tr>
+                    <th style="width: 10px" colspan="2">Detalhes do Pedido</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Pedido: {{$pedido->id}}</td>
+                    <td>Cliente: {{$pedido->cliente->nome}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <input type="hidden" name="pedido_id" value="{{$pedido->id}}">
+
         <div class="col">
             <div class="form-floating">
-                <select class="form-select" name="cliente_id" id="cliente_id">
+                <select class="form-select" name="produto_id" id="produto_id">
                     <option value="">Selecione...</option>
-                    @foreach ($clientes as $key => $cliente)
-                        <option value="{{$cliente->id}}" {{ ($pedido->cliente_id ?? old('cliente_id')) == $cliente->id ? 'selected' : '' }} >{{ $cliente->nome }}</option>    
+                    @foreach ($produtos as $key => $produto)
+                        <option value="{{$produto->id}}" {{ ($pedido_produto->produto_id ?? old('produto_id')) == $produto->id ? 'selected' : '' }} >{{ $produto->nome }}</option>    
                     @endforeach
                 </select>
-                <label for="cliente_id">Cliente</label>
+                <label for="produto_id">produto</label>
             </div>
-            @if($errors->has('cliente_id'))
+            @if($errors->has('produto_id'))
                 <div style="
                     text-align: left;
                     width: 99.3%;
@@ -26,7 +42,7 @@
                     margin-top: -10px;
                     padding: 5px;
                 ">
-                    {{$errors->first('cliente_id')}}
+                    {{$errors->first('produto_id')}}
                 </div>
             @endif
         </div>
@@ -115,7 +131,7 @@
                 <a href="{{route('app.pedidos.index')}}" class="btn btn-sm btn-danger"><i class="fas fa-undo-alt"></i> CANCELAR</a>  
             </div>
             <div class="col-md-6">
-                <button type="submit" class="btn btn-sm btn-success">{!!(isset($pedido)) ? '<i class="fas fa-sync"></i> ATUALIZAR' : '<i class="fas fa-save"></i> SALVAR'!!}</button>
+                <button type="submit" class="btn btn-sm btn-success">{!!(isset($pedido_produto)) ? '<i class="fas fa-sync"></i> ATUALIZAR' : '<i class="fas fa-save"></i> SALVAR'!!}</button>
             </div>
         </div>
     </form>

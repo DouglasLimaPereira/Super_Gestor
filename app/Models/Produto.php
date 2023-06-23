@@ -22,6 +22,11 @@ class Produto extends Model
         return $this->hasOne(Produtodetalhe::class);
     }
 
+    public function pedidos()
+    {
+        return $this->belongsToMany(Pedido::class)->withPivot('created_at', 'updated_at');
+    }
+
     public function fornecedor()
     {
         return $this->belongsTo(Fornecedor::class);

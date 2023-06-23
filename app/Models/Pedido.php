@@ -18,8 +18,13 @@ class Pedido extends Model
         return $this->belongsTo(Cliente::class);
     }
 
+    // public function produtos()
+    // {
+    //     return $this->belongsToMany(Produto::class);
+    // }
+
     public function produtos()
     {
-        return $this->belongsTo(PedidoProduto::class);
+        return $this->belongsToMany(Produto::class)->withPivot('created_at', 'updated_at');
     }
 }

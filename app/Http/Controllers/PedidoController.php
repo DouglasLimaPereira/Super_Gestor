@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PedidoController extends Controller
 {
@@ -31,7 +32,15 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            DB::beginTransaction();
+        try {
+            Pedido::create($request->all());
+            DB::commit();
+            return redirect()->route('app.clientes.index');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->route('app.clientes.create')->with($request);
+        }
     }
 
     /**
@@ -45,7 +54,7 @@ class PedidoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pedido $pedido)
+    public function edite(Pedido $pedido)
     {
         $clientes = Cliente::all();
         return view('app.pedido.edite', compact('pedido', 'clientes'));

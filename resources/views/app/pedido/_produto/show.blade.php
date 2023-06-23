@@ -11,16 +11,16 @@
         <div class="col-md-12" style="width: 70%; margin-left: auto; margin-right: auto">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title"> Id {{$pedido->id}} Cliente {{$pedido->cliente->nome}} </h3>
+                    <h3 class="card-title"> {{$pedido->cliente->nome}} </h3>
                     <div class="card-tools">
                     </div>
                 </div>
                 <div class="card-body">
                     {{-- <div class="row"> --}}
                         {{-- <div class="col-md-6"> --}}
-                            {{-- <div class="callout callout-info"> --}}
-                                {{-- <b>ID: </b> <br>
-                                <b>E-mail: </b> {!!($pedido->cliente->nome) ? '<span class="text-primary">' . $pedido->cliente->nome . '</span>' : '<span class="text-danger">Não informado</span>'!!}<br> --}}
+                            <div class="callout callout-info">
+                                <b>ID: </b> {{$pedido->id}}<br>
+                                <b>E-mail: </b> {!!($pedido->cliente->nome) ? '<span class="text-primary">' . $pedido->cliente->nome . '</span>' : '<span class="text-danger">Não informado</span>'!!}<br>
                                 {{-- <b>Usuário autoriza pelo setor de engenharia ?: </b>
                                     @if ($pedido->pessoa->engenharia == 1)
                                         SIM
@@ -37,12 +37,12 @@
                                 <br> --}}
                                 {{-- <b>Uf: </b> {{ $pedido->uf }}<br>
                                 <b>Site: </b> {{$pedido->site}}<br> --}}
-                            {{-- </div>
-                            <br> --}}
+                            </div>
+                            <br>
 
                             <div class="card">
                                 <div class="card-header bg-primary font-weight-bold">
-                                    <h5 style="color: white">Pedidos</h5>
+                                    <h5 style="color: white">Produtos do Pedido</h5>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-bordered table-striped table-responsive-md">
@@ -51,18 +51,17 @@
                                                 <th>Nome</th>
                                                 <th>Peso</th>
                                                 <th>Unidade</th>
-                                                <th>Criado em</th>
+                                                <th>Descrição</th>
                                                 <th>Ações</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
-                                            @forelse ($pedido->produtos as $key => $produto)
+                                            @forelse ($pedido->produtos as $produto)
                                             <tr>
                                                 <td>{{ $produto->nome}}</td>
                                                 <td>{{ $produto->peso}}</td>
                                                 <td>{{ $produto->unidade_id}}</td>
-                                                <td>{{ date('d/m/Y', strtotime($produto->pivot->created_at) )}}</td>
+                                                <td>{{ $produto->descricao}}</td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <button class="btn btn-light" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -78,7 +77,7 @@
                                             <div class="">
                                                 <ul class="nav nav-pills">
                                                     <li class="nav-item">
-                                                        <a href="{{ route('app.pedido-produtos.create', $pedido->id) }}" class="nav-link active"><i class="fas fa-plus-circle"></i> NOVO PEDIDO</a>
+                                                        <a href="{{ route('app.pedido-produtos.create', $pedido->id) }}" class="nav-link active"><i class="fas fa-plus-circle"></i> NOVO PRODUTO</a>
                                                     </li>
                                                 </ul>
                                             </div>

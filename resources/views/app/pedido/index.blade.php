@@ -1,12 +1,12 @@
 @extends('app.layouts.base')
 @section('titulo')
-    Super Gestor - Cliente
+    Super Gestor - Pedido
 @endsection
 
 @section('conteudo')
     <div class="conteudo-pagina">
         <div class="titulo-pagina-2">
-            <h1>Clientes</h1>
+            <h1>Pedidos</h1>
         </div>
         
         <div class="informacao-pagina">
@@ -54,6 +54,8 @@
                                                         <a href="{{ route('app.pedidos.edite', $row->id) }}" class="dropdown-item"><i class="far fa-edit"></i> Editar</a>
                                                         <div class="dropdown-divider"></div>
                                                         <a href="{{ route('app.pedidos.show', $row->id) }}" class="dropdown-item"><i class="fa-solid fa-eye"></i> Visualizar </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a href="{{ route('app.pedido-produtos.create', $row->id) }}" class="dropdown-item"><i class="fa-solid fa-cart-shopping"></i> Adicionar Produto </a>
                                                         <div class="dropdown-divider"></div>
                                                         <a href="javascript:void(0)" class="dropdown-item text-danger" onclick="remover({{$row->id}})"><i class="fas fa-trash"></i> Remover</a>
                                                     </div>

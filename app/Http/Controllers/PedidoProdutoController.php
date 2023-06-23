@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pedido;
+use App\Models\Pedidoproduto;
+use App\Models\Produto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PedidoProdutoController extends Controller
 {
@@ -17,17 +21,45 @@ class PedidoProdutoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Pedido $pedido)
     {
-        //
+        $produtos = Produto::all();
+        return view('app.pedido._produto.create', compact('produtos', 'pedido'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Pedido $pedido)
     {
-        //
+        $request->validate(
+            [
+            'produto_id' => 'exists:produtos,id|required',
+            'pedido_id' => 'exists:pedidos,id|required',
+            ],
+            [
+                'produto_id.required' => 'Necessário selecionar um produto.',
+                'pedido_id.required' => 'Necessário selecionar um pedido.',
+            ]
+        );
+        
+        DB::beginTransaction();
+        try {
+            PedidoProduto::create(
+                [
+                    'produto_id' => $request['produto_id'],
+                    'pedido_id' => $pedido->id,
+                ]
+            );
+            DB::commit();
+            return redirect()->route('app.pedido-produtos.create', $pedido->id)->with('success', 'Produto adicionado com sucesso!!!');
+
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Não foi possível cadastrar produto ao pedido');
+        }
+        
     }
 
     /**
