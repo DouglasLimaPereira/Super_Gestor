@@ -6,12 +6,12 @@
 @section('conteudo')
     <div class="row">
         <div class="titulo-pagina-2">
-            <h1>Pedidos</h1>
+            <h1>Pedido</h1>
         </div>
         <div class="col-md-12" style="width: 70%; margin-left: auto; margin-right: auto">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title"> Id {{$pedido->id}} Cliente {{$pedido->cliente->nome}} </h3>
+                    <h3 class="card-title"> {{$pedido->cliente->nome}} </h3>
                     <div class="card-tools">
                     </div>
                 </div>
@@ -42,13 +42,14 @@
 
                             <div class="card">
                                 <div class="card-header bg-primary font-weight-bold">
-                                    <h5 style="color: white">Pedidos</h5>
+                                    <h5 style="color: white">produtos</h5>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-bordered table-striped table-responsive-md">
                                         <thead class="table-info">
                                             <tr>
-                                                <th>Nome</th>
+                                                <th>Pedido N°</th>
+                                                <th>Produto</th>
                                                 <th>Peso</th>
                                                 <th>Unidade</th>
                                                 <th>Criado em</th>
@@ -59,6 +60,7 @@
                                             
                                             @forelse ($pedido->produtos as $key => $produto)
                                             <tr>
+                                                <td>{{ $pedido->id }}</td>
                                                 <td>{{ $produto->nome}}</td>
                                                 <td>{{ $produto->peso}}</td>
                                                 <td>{{ $produto->unidade_id}}</td>
