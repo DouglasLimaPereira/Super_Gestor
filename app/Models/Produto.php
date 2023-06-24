@@ -24,7 +24,7 @@ class Produto extends Model
 
     public function pedidos()
     {
-        return $this->belongsToMany(Pedido::class)->withPivot('created_at', 'updated_at');
+        return $this->belongsToMany(Pedido::class)->withPivot('id', 'created_at', 'updated_at', 'quantidade');
     }
 
     public function fornecedor()

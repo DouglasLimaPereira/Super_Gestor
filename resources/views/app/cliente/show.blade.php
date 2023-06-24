@@ -112,11 +112,11 @@
                     <div class="dropdown-divider"></div>
                     <div class="row col-md-12">
                         <div class="mr-2">
-                            <a href="{{route('app.fornecedores.index', $cliente->id)}}" class="btn btn-outline-danger"><i class="fas fa-undo"></i> Voltar</a>
+                            <a href="{{route('app.clientes.index', $cliente->id)}}" class="btn btn-outline-danger"><i class="fas fa-undo"></i> Voltar</a>
                                         
                             {{-- @if (($cliente->id == auth()->usuario()->id ) || ( auth()->usuario()->companies->firstWhere('superadmin', 1))) --}}
                                 
-                                <a href="{{ route('app.fornecedores.edite', $cliente->id) }}" class="btn btn-outline-success"><i class="fas fa-edit"></i> Editar </a>
+                                <a href="{{ route('app.clientes.edite', $cliente->id) }}" class="btn btn-outline-success"><i class="fas fa-edit"></i> Editar </a>
                             
                             {{-- @endif --}}
                         </div>

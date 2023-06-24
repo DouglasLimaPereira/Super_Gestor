@@ -51,7 +51,7 @@
                                                 <th>Pedido N°</th>
                                                 <th>Produto</th>
                                                 <th>Peso</th>
-                                                <th>Unidade</th>
+                                                <th>Quantidade</th>
                                                 <th>Criado em</th>
                                                 <th>Ações</th>
                                             </tr>
@@ -63,7 +63,7 @@
                                                 <td>{{ $pedido->id }}</td>
                                                 <td>{{ $produto->nome}}</td>
                                                 <td>{{ $produto->peso}}</td>
-                                                <td>{{ $produto->unidade_id}}</td>
+                                                <td>{{ $produto->pivot->quantidade}}</td>
                                                 <td>{{ date('d/m/Y', strtotime($produto->pivot->created_at) )}}</td>
                                                 <td>
                                                     <div class="dropdown">
@@ -72,6 +72,9 @@
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                                                             <a href="{{ route('app.pedido-produtos.show', $produto->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Visualizar</a>
+
+                                                            <div class="dropdown-divider"></div>
+                                                            <a href="javascript:void(0)" class="dropdown-item text-danger" onclick="remover({{$produto->pivot->id}}, {{$pedido->id}})"><i class="fas fa-trash"></i> Remover</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -115,7 +118,7 @@
                     <hr>
                     <div class="dropdown-divider"></div>
                     <div class="row col-md-12">
-                        <div class="mr-2">
+                        <div class="mr-2" style="text-align: right">
                             <a href="{{route('app.pedidos.index', $pedido->id)}}" class="btn btn-outline-danger"><i class="fas fa-undo"></i> Voltar</a>
                                         
                             {{-- @if (($pedido->id == auth()->usuario()->id ) || ( auth()->usuario()->companies->firstWhere('superadmin', 1))) --}}
@@ -123,6 +126,7 @@
                                 <a href="{{ route('app.pedidos.edite', $pedido->id) }}" class="btn btn-outline-success"><i class="fas fa-edit"></i> Editar </a>
                             
                             {{-- @endif --}}
+                            <a href="javascript:void(0)" class="btn btn-outline-danger" onclick="removerpedido({{$pedido->id}})"><i class="fas fa-trash"></i> Remover</a>
                         </div>
                     </div>
                 </div>
@@ -134,11 +138,21 @@
 
 {{-- Removendo o registro --}}
 <script>
-    function remover(pedido){
+    function remover(pedido_produtos, pedido){
+        $confirmacao = confirm('Tem certeza que deseja remover este produto?');
+
+        if($confirmacao){
+            window.location.href = "{{url('/')}}/app/pedido-produtos/"+pedido_produtos+"/pedido/"+pedido+"/destroy"
+        }
+    }
+</script>
+
+<script>
+    function removerpedido(pedido){
         $confirmacao = confirm('Tem certeza que deseja remover este pedido?');
 
         if($confirmacao){
-            window.location.href = "{{url('/')}}/app/pedidos/"+pedido+"/destroy"
+            window.location.href = "{{url('/')}}/app/pedido/"+pedido+"/destroy"
         }
     }
 </script>

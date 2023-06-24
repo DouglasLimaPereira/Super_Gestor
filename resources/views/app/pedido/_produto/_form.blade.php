@@ -46,12 +46,13 @@
                 </div>
             @endif
         </div>
-        {{-- <div class="div-col">
+        <br>
+        <div class="div-col">
             <div class="form-floating">
-                <input type="text" class="form-control" name="nome" placeholder="Nome" id="nome" value="{{ isset($cliente) ? $cliente->nome : old('nome')}}">
-                <label for="nome">Nome</label>
+                <input type="text" class="form-control" name="quantidade" placeholder="quantidade" id="quantidade" value="{{ isset($pedido_produto) ? $pedido_produto->quantidade : old('quantidade')}}">
+                <label for="quantidade">Quantidade</label>
             </div>
-            @if($errors->has('nome'))
+            @if($errors->has('quantidade'))
                 <div style="
                     text-align: left;
                     width: 98%;
@@ -60,10 +61,10 @@
                     margin-top: -10px;
                     padding: 5px;
                 ">
-                    {{$errors->first('nome')}}
+                    {{$errors->first('quantidade')}}
                 </div>
             @endif
-        </div> --}}
+        </div>
         
         {{-- <div class="div-col">
             <div class="form-floating">

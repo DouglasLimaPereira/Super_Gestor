@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
-use App\Models\Pedidoproduto;
+use App\Models\PedidoProduto;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -45,12 +45,21 @@ class PedidoProdutoController extends Controller
         
         DB::beginTransaction();
         try {
-            PedidoProduto::create(
+
+            $pedido->produtos()->attach(
+                $request['produto_id'],
                 [
-                    'produto_id' => $request['produto_id'],
-                    'pedido_id' => $pedido->id,
-                ]
+                    'quantidade' => $request['quantidade']
+                ],
             );
+
+            // PedidoProduto::create(
+            //     [
+            //         'produto_id' => $request['produto_id'],
+            //         'pedido_id' => $pedido->id,
+            //         'quantidade' => $request['quantidade'],
+            //     ]
+            // );
             DB::commit();
             return redirect()->route('app.pedido-produtos.create', $pedido->id)->with('success', 'Produto adicionado com sucesso!!!');
 
@@ -89,8 +98,18 @@ class PedidoProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(PedidoProduto $pedido_produtos, Pedido $pedido)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $pedido_produtos->delete();
+            DB::commit();
+            return redirect()->route('app.pedidos.show', $pedido->id)->with('success', 'Produto removido com sucesso!!!');
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->with('erros', 'Não foi possível remover produto');
+        }
+        
     }
 }

@@ -88,7 +88,7 @@ Route::group(['prefix'=>'app', 'as'=>'app.', 'middleware'=>['autenticacao']], fu
                 ->name('edite');
             Route::put('{pedido_produtos}/update', [PedidoProdutoController::class, 'update'])
                 ->name('update');
-            Route::get('{pedido_produtos}/destroy', [PedidoProdutoController::class, 'destroy'])
+            Route::get('{pedido_produtos}/pedido/{pedido}/destroy', [PedidoProdutoController::class, 'destroy'])
                 ->name('destroy');
         });
 
