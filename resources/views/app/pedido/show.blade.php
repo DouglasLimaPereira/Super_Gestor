@@ -71,7 +71,7 @@
                                                             <i class="fas fa-ellipsis-v"></i>
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                                                            <a href="{{ route('app.pedido-produtos.show', $produto->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Visualizar</a>
+                                                            <a href="{{ route('app.produtos.show', $produto->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Visualizar</a>
 
                                                             <div class="dropdown-divider"></div>
                                                             <a href="javascript:void(0)" class="dropdown-item text-danger" onclick="remover({{$produto->pivot->id}}, {{$pedido->id}})"><i class="fas fa-trash"></i> Remover</a>
